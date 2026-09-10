@@ -58,11 +58,11 @@ export default function H5Page() {
         </div>
         {menuOpen ? (
           <nav className="flex flex-col gap-3 border-t border-[rgba(194,198,216,0.3)] px-4 py-3 text-sm font-medium text-[#424656]">
-            <a href="#features" onClick={() => setMenuOpen(false)}>
-              {t.navFeatures}
-            </a>
             <a href="#how" onClick={() => setMenuOpen(false)}>
               {t.navHow}
+            </a>
+            <a href="#features" onClick={() => setMenuOpen(false)}>
+              {t.navFeatures}
             </a>
             <a href="#faq" onClick={() => setMenuOpen(false)}>
               {t.navFaq}
@@ -84,7 +84,9 @@ export default function H5Page() {
             <h1 className="text-[26px] font-bold leading-8 tracking-tight">
               <span className="block text-[#191b24]">{t.heroLine1}</span>
               <span className="block font-normal text-[#0050cb]">{t.heroLine2}</span>
-              <span className="block font-normal text-[#0050cb]">{t.heroLine3}</span>
+              {t.heroLine3 ? (
+                <span className="block font-normal text-[#0050cb]">{t.heroLine3}</span>
+              ) : null}
             </h1>
             <p className="text-base leading-6 text-[#424656]">{t.heroBody}</p>
             <div className="flex items-center gap-3 rounded-xl border border-[rgba(194,198,216,0.3)] bg-[#f2f3ff] p-4">
@@ -93,11 +95,7 @@ export default function H5Page() {
               </div>
               <div>
                 <p className="text-[13px] font-medium text-[#191b24]">{t.calloutTitle}</p>
-                <p className="text-[13px] leading-[18px] text-[#424656]">
-                  {t.calloutBody1}
-                  <br />
-                  {t.calloutBody2}
-                </p>
+                <p className="text-[13px] leading-[18px] text-[#424656]">{t.calloutBody}</p>
               </div>
             </div>
 
@@ -109,8 +107,7 @@ export default function H5Page() {
                     <p className="text-2xl font-bold leading-8 tracking-tight">$5,280.00</p>
                     <div className="mt-1 flex items-center gap-1">
                       <img src={imgTrend} alt="" className="size-2" />
-                      <span className="text-[13px] font-medium text-[#ba1a1a]">+12.4%</span>
-                      <span className="text-[13px] font-medium text-[#424656]">{t.thisMonth}</span>
+                      <span className="text-[13px] font-medium text-[#ba1a1a]">{t.percentThisMonth}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5 rounded-full border border-[rgba(194,198,216,0.5)] bg-[#ecedfa] px-2.5 py-1.5">
@@ -221,7 +218,7 @@ export default function H5Page() {
                 <div className={`mb-4 flex size-10 items-center justify-center rounded-xl ${c.bg}`}>
                   <img src={c.icon} alt="" className="size-[18px]" />
                 </div>
-                <p className="mb-1 text-xs font-medium uppercase tracking-[0.7px] text-[#424656]">{c.label}</p>
+                <p className="mb-1 text-xs font-medium tracking-[0.7px] text-[#424656]">{c.label}</p>
                 <h3 className="mb-3 text-lg font-semibold tracking-tight">{c.title}</h3>
                 <p className="mb-4 text-sm leading-5 text-[#424656]">{c.body}</p>
                 {c.tag ? (
@@ -278,7 +275,7 @@ export default function H5Page() {
                     <span className="text-base font-semibold tracking-tight">{item.q}</span>
                     <img src={open ? imgChevronUp : imgChevronDown} alt="" className="mt-2 h-[7px] w-3 shrink-0" />
                   </button>
-                  {open && item.a ? (
+                  {open ? (
                     <div className="border-t border-[rgba(194,198,216,0.2)] px-4 pb-4 pt-3">
                       <p className="text-sm leading-6 text-[#424656]">{item.a}</p>
                     </div>

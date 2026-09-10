@@ -46,17 +46,18 @@ npm run build
 npm run preview
 ```
 
-## Updates (i18n + FAQ)
+## Updates (official copy)
 
-- **Real EN / 中文 switch:** Shared `src/i18n` (`messages.ts` + `LanguageContext`) and `LanguageSwitcher` on Web + H5. Choice persists in `localStorage` key `knocknok-lang`. Nav, hero, sections, CTAs, steps, FAQ questions, footer are translated.
-- **FAQ answers:** Only the first FAQ (“Is KnockNok a bank?” / 「KnockNok 是银行吗？」) has approved answer copy. Items 2+ are questions only—no invented answers. Expanding shows answer body only when `a` is present; awaiting official Q&A from PM.
+- Synced **EN** UI strings from `/workspace/kennethTest/usd-site-copy/official-en.txt` into `src/i18n/messages.ts` (nav, hero, dashboard labels, features, steps, all **11 FAQ** Q&A).
+- Added matching **简体中文** translations for the full official EN set; brand terms KnockNok / USDC / ACH retained.
+- FAQ accordion shows the answer for every item when expanded.
+- Language switch (`knocknok-lang` localStorage) unchanged.
 
-## Remaining design gaps
+## Remaining notes
 
-1. **FAQ items 2+:** Questions only until official answers are supplied.
-2. **H5 hamburger:** In-page nav sheet; links jump to sections.
-3. **Phone mockup crops / footer vectors:** Approximate Figma, not pixel-identical.
-4. **No backend / waitlist CTA** beyond static marketing UI.
+1. Footer slogan / disclosure not present in `official-en.txt`; kept prior Figma marketing footer copy (EN + ZH).
+2. Phone mockup image chrome (Total Balance / Earn screens) remains in raster assets, not re-typeset as HTML.
+3. H5 hamburger is an in-page section nav.
 
 ## Build status
 

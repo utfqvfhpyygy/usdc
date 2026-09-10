@@ -37,8 +37,7 @@ function DashboardCard() {
             <p className="text-[32px] font-bold leading-10 tracking-tight text-[#191b24]">$5,280.00</p>
             <div className="flex items-center gap-1">
               <img src={imgTrend} alt="" className="size-[9px]" />
-              <span className="text-sm font-medium text-[#ba1a1a]">+12.4%</span>
-              <span className="text-sm font-medium text-[#424656]">{t.thisMonth}</span>
+              <span className="text-sm font-medium text-[#ba1a1a]">{t.percentThisMonth}</span>
             </div>
           </div>
           <div className="flex items-center gap-2 rounded-full border border-[rgba(194,198,216,0.5)] bg-[#ecedfa] px-3 py-1.5">
@@ -106,11 +105,11 @@ export default function WebPage() {
             <span className="text-2xl font-bold tracking-tight">KnockNok</span>
           </a>
           <nav className="flex items-center gap-8 text-sm font-medium text-[#424656]">
-            <a href="#features" className="hover:text-[#191b24]">
-              {t.navFeatures}
-            </a>
             <a href="#how" className="hover:text-[#191b24]">
               {t.navHow}
+            </a>
+            <a href="#features" className="hover:text-[#191b24]">
+              {t.navFeatures}
             </a>
             <a href="#faq" className="hover:text-[#191b24]">
               {t.navFaq}
@@ -131,7 +130,9 @@ export default function WebPage() {
               <h1 className="text-5xl font-bold tracking-tight leading-14">
                 <span className="block text-[#191b24]">{t.heroLine1}</span>
                 <span className="block font-normal text-[#0050cb]">{t.heroLine2}</span>
-                <span className="block font-normal text-[#0050cb]">{t.heroLine3}</span>
+                {t.heroLine3 ? (
+                  <span className="block font-normal text-[#0050cb]">{t.heroLine3}</span>
+                ) : null}
               </h1>
               <p className="text-lg leading-7 text-[#424656]">{t.heroBody}</p>
               <div className="pt-4">
@@ -141,11 +142,7 @@ export default function WebPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium tracking-wide text-[#191b24]">{t.calloutTitle}</p>
-                    <p className="text-sm leading-5 text-[#424656]">
-                      {t.calloutBody1}
-                      <br />
-                      {t.calloutBody2}
-                    </p>
+                    <p className="text-sm leading-5 text-[#424656]">{t.calloutBody}</p>
                   </div>
                 </div>
               </div>
@@ -216,7 +213,7 @@ export default function WebPage() {
                   <div className={`mb-6 flex size-12 items-center justify-center rounded-xl ${card.iconBg}`}>
                     <img src={card.icon} alt="" className="size-5" />
                   </div>
-                  <p className="mb-2 text-sm font-medium uppercase tracking-[0.7px] text-[#424656]">{card.label}</p>
+                  <p className="mb-2 text-sm font-medium tracking-[0.7px] text-[#424656]">{card.label}</p>
                   <h3 className="mb-4 text-xl font-semibold tracking-tight text-[#191b24]">{card.title}</h3>
                   <p className="mb-6 flex-1 text-base leading-6 text-[#424656]">{card.body}</p>
                   {card.tag ? (
@@ -284,7 +281,7 @@ export default function WebPage() {
                         className="h-[7px] w-3 shrink-0"
                       />
                     </button>
-                    {open && item.a ? (
+                    {open ? (
                       <div className="border-t border-[rgba(194,198,216,0.2)] px-6 pb-6 pt-4">
                         <p className="text-base leading-7 text-[#424656]">{item.a}</p>
                       </div>

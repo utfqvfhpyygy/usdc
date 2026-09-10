@@ -46,15 +46,17 @@ npm run build
 npm run preview
 ```
 
-## Design gaps / limitations
+## Updates (i18n + FAQ)
 
-1. **FAQ answers:** Only the first item (“Is KnockNok a bank?”) has body copy in the Figma frame; others are collapsed headers only—UI toggles but empty answers until design provides text.
-2. **Language / EN control:** Visual only (no real i18n).
-3. **H5 hamburger:** Opens an in-page nav sheet (not in Figma as a full menu design); links jump to sections.
-4. **Phone mockup crops:** Desktop/H5 crop ratios approximate Figma; slight differences vs pixel-perfect absolute export possible.
-5. **Footer decorative vectors:** Present but may not match Figma opacity/placement 1:1.
-6. **Duplicate Web frame** `88:3780` in the file was ignored (same name/size as `66:2812`).
-7. **No backend / waitlist CTA** beyond static marketing UI from the frames.
+- **Real EN / 中文 switch:** Shared `src/i18n` (`messages.ts` + `LanguageContext`) and `LanguageSwitcher` on Web + H5. Choice persists in `localStorage` key `knocknok-lang`. Nav, hero, sections, CTAs, steps, FAQ questions, footer are translated.
+- **FAQ answers:** Only the first FAQ (“Is KnockNok a bank?” / 「KnockNok 是银行吗？」) has approved answer copy. Items 2+ are questions only—no invented answers. Expanding shows answer body only when `a` is present; awaiting official Q&A from PM.
+
+## Remaining design gaps
+
+1. **FAQ items 2+:** Questions only until official answers are supplied.
+2. **H5 hamburger:** In-page nav sheet; links jump to sections.
+3. **Phone mockup crops / footer vectors:** Approximate Figma, not pixel-identical.
+4. **No backend / waitlist CTA** beyond static marketing UI.
 
 ## Build status
 

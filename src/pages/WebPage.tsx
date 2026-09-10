@@ -1,4 +1,6 @@
 import { useState } from "react";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useLanguage } from "../i18n/LanguageContext";
 
 const a = "/assets/web";
 const imgUs = `${a}/imgUs.svg`;
@@ -24,35 +26,19 @@ const imgVector1 = `${a}/imgVector1.svg`;
 const imgVector2 = `${a}/imgVector2.svg`;
 const imgVector3 = `${a}/imgVector3.svg`;
 
-const faqs: { q: string; a?: string }[] = [
-  {
-    q: "Is KnockNok a bank?",
-    a: "No. KnockNok is a financial technology platform, not a bank. Banking and payment services are provided by regulated financial partners where applicable.",
-  },
-  { q: "Do I get my own U.S. bank account?" },
-  { q: "Is the account in my name?" },
-  { q: "Who can send money to my account?" },
-  { q: "Can my U.S. client pay me through ACH?" },
-  { q: "What happens when USD arrives?" },
-  { q: "What is USDC?" },
-  { q: "Do I need to know how crypto works?" },
-  { q: "Is my wallet self-custodial?" },
-  { q: "Can I receive payments from AdSense, App Store, Upwork, or other platforms?" },
-  { q: "Are USDC balances FDIC insured?" },
-];
-
 function DashboardCard() {
+  const { t } = useLanguage();
   return (
     <div className="flex w-full max-w-[476px] flex-col items-center justify-center overflow-hidden rounded-3xl border border-[rgba(194,198,216,0.4)] bg-[#f2f3ff] px-8 py-16 shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]">
       <div className="relative flex w-full max-w-[384px] flex-col gap-4 rounded-2xl border border-[rgba(194,198,216,0.3)] bg-[#faf8ff] p-6 shadow-md">
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-medium tracking-wide text-[#424656]">Your Balance</p>
+            <p className="text-sm font-medium tracking-wide text-[#424656]">{t.balanceLabel}</p>
             <p className="text-[32px] font-bold leading-10 tracking-tight text-[#191b24]">$5,280.00</p>
             <div className="flex items-center gap-1">
               <img src={imgTrend} alt="" className="size-[9px]" />
               <span className="text-sm font-medium text-[#ba1a1a]">+12.4%</span>
-              <span className="text-sm font-medium text-[#424656]">this month</span>
+              <span className="text-sm font-medium text-[#424656]">{t.thisMonth}</span>
             </div>
           </div>
           <div className="flex items-center gap-2 rounded-full border border-[rgba(194,198,216,0.5)] bg-[#ecedfa] px-3 py-1.5">
@@ -67,19 +53,19 @@ function DashboardCard() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img src={imgUs} alt="" className="size-6" />
-              <span className="text-sm font-semibold text-[#191b24]">USD Account</span>
+              <span className="text-sm font-semibold text-[#191b24]">{t.usdAccount}</span>
             </div>
             <button type="button" className="flex items-center gap-1 text-sm font-medium text-[#0050cb]">
               <img src={imgCopy} alt="" className="h-[12px] w-[10px]" />
-              Copy Details
+              {t.copyDetails}
             </button>
           </div>
           {[
-            ["Account holder", "David Chen"],
-            ["Routing number", "•••• 2819"],
-            ["Account number", "•••• 7642"],
+            [t.accountHolder, "David Chen"],
+            [t.routingNumber, "•••• 2819"],
+            [t.accountNumber, "•••• 7642"],
           ].map(([label, value]) => (
-            <div key={label} className="flex justify-between text-sm">
+            <div key={label} className="flex justify-between gap-4 text-sm">
               <span className="text-[#424656]">{label}</span>
               <span className="font-medium text-[#191b24]">{value}</span>
             </div>
@@ -92,14 +78,14 @@ function DashboardCard() {
             className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#0050cb] px-4 py-2.5 text-sm font-medium text-white"
           >
             <img src={imgPlus} alt="" className="size-[9px]" />
-            Receive USD
+            {t.receiveUsd}
           </button>
           <button
             type="button"
             className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#c2c6d8] bg-[#faf8ff] px-4 py-2.5 text-sm font-medium text-[#191b24]"
           >
             <img src={imgSend} alt="" className="size-[9px]" />
-            Send
+            {t.send}
           </button>
         </div>
       </div>
@@ -108,10 +94,11 @@ function DashboardCard() {
 }
 
 export default function WebPage() {
+  const { t, locale } = useLanguage();
   const [openFaq, setOpenFaq] = useState(0);
 
   return (
-    <div className="min-h-screen bg-white font-sans text-[#191b24]" data-node-id="66:2812">
+    <div className="min-h-screen bg-white font-sans text-[#191b24]" data-node-id="66:2812" lang={locale === "zh" ? "zh-CN" : "en"}>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[rgba(194,198,216,0.15)] bg-[rgba(250,248,255,0.8)] shadow-[0px_1px_8px_0px_rgba(0,0,0,0.04)] backdrop-blur-[12px]">
         <div className="mx-auto flex h-20 max-w-[1280px] items-center justify-between px-10">
           <a href="#top" className="flex items-center gap-3">
@@ -120,28 +107,20 @@ export default function WebPage() {
           </a>
           <nav className="flex items-center gap-8 text-sm font-medium text-[#424656]">
             <a href="#features" className="hover:text-[#191b24]">
-              Features
+              {t.navFeatures}
             </a>
             <a href="#how" className="hover:text-[#191b24]">
-              How It Works
+              {t.navHow}
             </a>
             <a href="#faq" className="hover:text-[#191b24]">
-              FAQ
+              {t.navFaq}
             </a>
           </nav>
-          <button
-            type="button"
-            className="flex items-center gap-1.5 rounded-lg border-[1.67px] border-[#dfe1ef] bg-[#faf8ff] px-3 py-2"
-          >
-            <img src={imgIcon} alt="" className="size-3.5" />
-            <span className="font-sans text-xs font-semibold">EN</span>
-            <img src={imgIcon1} alt="" className="size-3.5" />
-          </button>
+          <LanguageSwitcher globeSrc={imgIcon} chevronSrc={imgIcon1} />
         </div>
       </header>
 
       <main id="top" className="pt-20">
-        {/* Hero */}
         <section className="relative overflow-hidden bg-[#faf8ff] px-10 py-20">
           <div className="pointer-events-none absolute inset-0 opacity-30">
             <div className="absolute -right-64 -top-96 size-[800px] rounded-full bg-[rgba(179,197,255,0.2)] blur-[32px]" />
@@ -150,25 +129,22 @@ export default function WebPage() {
           <div className="relative mx-auto flex max-w-[1200px] items-center justify-center gap-16">
             <div className="flex max-w-[576px] flex-1 flex-col gap-6">
               <h1 className="text-5xl font-bold tracking-tight leading-14">
-                <span className="block text-[#191b24]">Get Paid in Dollars.</span>
-                <span className="block font-normal text-[#0050cb]">Keep control of your</span>
-                <span className="block font-normal text-[#0050cb]">money.</span>
+                <span className="block text-[#191b24]">{t.heroLine1}</span>
+                <span className="block font-normal text-[#0050cb]">{t.heroLine2}</span>
+                <span className="block font-normal text-[#0050cb]">{t.heroLine3}</span>
               </h1>
-              <p className="text-lg leading-7 text-[#424656]">
-                Get your own U.S. account details to receive payments from U.S. clients and platforms.
-                Incoming USD is automatically converted to USDC and delivered to your self-custodial wallet.
-              </p>
+              <p className="text-lg leading-7 text-[#424656]">{t.heroBody}</p>
               <div className="pt-4">
                 <div className="flex items-center gap-4 rounded-xl border border-[rgba(194,198,216,0.3)] bg-[#f2f3ff] p-4">
                   <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#06f]">
                     <img src={imgGlobe} alt="" className="size-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium tracking-wide text-[#191b24]">No U.S. company required.</p>
+                    <p className="text-sm font-medium tracking-wide text-[#191b24]">{t.calloutTitle}</p>
                     <p className="text-sm leading-5 text-[#424656]">
-                      Built for freelancers, independent contractors, creators,
+                      {t.calloutBody1}
                       <br />
-                      and digital nomads outside the U.S
+                      {t.calloutBody2}
                     </p>
                   </div>
                 </div>
@@ -178,67 +154,59 @@ export default function WebPage() {
           </div>
         </section>
 
-        {/* Phone showcase */}
         <section className="border-y border-[rgba(194,198,216,0.2)] bg-white px-10 pb-0 pt-20">
           <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-12">
             <div className="flex max-w-[808px] flex-col items-center gap-4 text-center">
               <h2 className="text-5xl font-bold leading-14 tracking-tight text-[#191b24]">
-                Your Money. Without Borders.
+                {t.bordersTitle1}
                 <br />
-                Get Paid in USD, Wherever You Are.
+                {t.bordersTitle2}
               </h2>
-              <p className="text-2xl leading-8 tracking-tight text-[#424656]">
-                Low transfer fees, around 0.5%. Settles from your USDC in seconds.
-              </p>
+              <p className="text-2xl leading-8 tracking-tight text-[#424656]">{t.bordersSub}</p>
             </div>
             <div className="flex items-end justify-center gap-10 overflow-hidden">
               <div className="relative h-[380px] w-[326px] overflow-hidden rounded-t-[40px] border border-[#898d98]">
-                <img src={imgRectangle1} alt="USD Account app screen" className="absolute inset-0 h-[186%] w-full object-cover object-top" />
+                <img src={imgRectangle1} alt="" className="absolute inset-0 h-[186%] w-full object-cover object-top" />
               </div>
               <div className="relative h-[515px] w-[326px] overflow-hidden rounded-t-[40px] border border-[#898d98]">
-                <img src={imgRectangle2} alt="Wallet app screen" className="absolute inset-0 h-[137%] w-full object-cover object-top" />
+                <img src={imgRectangle2} alt="" className="absolute inset-0 h-[137%] w-full object-cover object-top" />
               </div>
               <div className="relative h-[427px] w-[326px] overflow-hidden rounded-t-[40px] border border-[#898d98]">
-                <img src={imgRectangle3} alt="Earn app screen" className="absolute inset-0 h-[165%] w-full object-cover object-top" />
+                <img src={imgRectangle3} alt="" className="absolute inset-0 h-[165%] w-full object-cover object-top" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features */}
         <section id="features" className="border-y border-[rgba(194,198,216,0.2)] bg-[#faf8ff] px-10 py-20">
           <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-12">
             <div className="flex max-w-[800px] flex-col items-center gap-4 text-center">
-              <h2 className="text-5xl font-bold leading-14 tracking-tight text-[#191b24]">
-                One simple way to receive and manage your U.S. income.
-              </h2>
-              <p className="text-lg leading-7 text-[#424656]">
-                Stop stitching together multiple accounts, exchanges, and wallets.
-              </p>
+              <h2 className="text-5xl font-bold leading-14 tracking-tight text-[#191b24]">{t.featuresTitle}</h2>
+              <p className="text-lg leading-7 text-[#424656]">{t.featuresSub}</p>
             </div>
             <div className="grid w-full grid-cols-3 gap-8">
               {[
                 {
                   icon: imgReceive,
                   iconBg: "bg-[#dae1ff]",
-                  label: "RECEIVE",
-                  title: "Get paid like a local.",
-                  body: "Receive payments from U.S. clients and supported platforms using your personal U.S. account details.",
-                  tag: "ACH • Wire",
+                  label: t.receiveLabel,
+                  title: t.receiveTitle,
+                  body: t.receiveBody,
+                  tag: t.receiveTag,
                 },
                 {
                   icon: imgConvert,
                   iconBg: "bg-[#d6e3ff]",
-                  label: "CONVERT",
-                  title: "USD in. USDC out. Automatically.",
-                  body: "When a payment arrives, your USD is automatically converted to USDC. No manual exchange or extra steps.",
+                  label: t.convertLabel,
+                  title: t.convertTitle,
+                  body: t.convertBody,
                 },
                 {
                   icon: imgControl,
                   iconBg: "bg-[#d3e4fe]",
-                  label: "CONTROL",
-                  title: "Your money. Your wallet.",
-                  body: "Your USDC is delivered to your self-custodial wallet, giving you direct control over your funds.",
+                  label: t.controlLabel,
+                  title: t.controlTitle,
+                  body: t.controlBody,
                 },
               ].map((card) => (
                 <div
@@ -262,33 +230,17 @@ export default function WebPage() {
           </div>
         </section>
 
-        {/* Steps */}
         <section id="how" className="bg-white px-10 py-20">
           <div className="mx-auto flex max-w-[1200px] flex-col gap-20">
             <h2 className="mx-auto max-w-[800px] text-center text-5xl font-bold leading-14 tracking-tight text-[#191b24]">
-              From a U.S. payment to your wallet in three steps.
+              {t.stepsTitle}
             </h2>
             <div className="relative grid grid-cols-3 gap-12">
               <div className="pointer-events-none absolute left-[4%] right-[28%] top-6 h-0.5 bg-[rgba(194,198,216,0.3)]" />
               {[
-                {
-                  n: "1",
-                  title: "Create your account",
-                  body: "Sign up and verify your identity. Once approved, you'll receive U.S. account details associated with your verified identity.",
-                  note: "No exchange account.",
-                },
-                {
-                  n: "2",
-                  title: "Get paid in USD",
-                  body: "Share your account details with your U.S. clients, employers, or supported platforms. They pay you through familiar U.S. banking rails such as ACH or wire.",
-                  note: "No manual conversion.",
-                },
-                {
-                  n: "3",
-                  title: "Receive USDC",
-                  body: "Incoming USD is automatically converted to USDC and sent to your self-custodial wallet.",
-                  note: "No complicated crypto workflow.",
-                },
+                { n: "1", title: t.step1Title, body: t.step1Body, note: t.step1Note },
+                { n: "2", title: t.step2Title, body: t.step2Body, note: t.step2Note },
+                { n: "3", title: t.step3Title, body: t.step3Body, note: t.step3Note },
               ].map((step) => (
                 <div key={step.n} className="relative flex flex-col">
                   <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-[#0050cb] text-2xl font-semibold text-white shadow-md">
@@ -305,23 +257,23 @@ export default function WebPage() {
           </div>
         </section>
 
-        {/* FAQ */}
         <section id="faq" className="bg-[#faf8ff] px-10 py-20">
           <div className="mx-auto flex max-w-[768px] flex-col gap-12">
             <div className="text-center">
-              <h2 className="text-5xl font-bold tracking-tight text-[#191b24]">FAQ</h2>
-              <p className="mt-4 text-lg text-[#424656]">Frequently asked questions</p>
+              <h2 className="text-5xl font-bold tracking-tight text-[#191b24]">{t.faqTitle}</h2>
+              <p className="mt-4 text-lg text-[#424656]">{t.faqSubtitle}</p>
             </div>
             <div className="flex flex-col gap-4">
-              {faqs.map((item, i) => {
+              {t.faqs.map((item, i) => {
                 const open = openFaq === i;
                 return (
                   <div
-                    key={item.q}
-                    className="overflow-hidden rounded-xl border border-[rgba(194,198,216,0.3)] bg-white"
+                    key={`${locale}-${item.q}`}
+                    className="rounded-xl border border-[rgba(194,198,216,0.3)] bg-white"
                   >
                     <button
                       type="button"
+                      aria-expanded={open}
                       className="flex w-full items-center justify-between gap-4 p-6 text-left"
                       onClick={() => setOpenFaq(open ? -1 : i)}
                     >
@@ -333,7 +285,9 @@ export default function WebPage() {
                       />
                     </button>
                     {open && item.a ? (
-                      <p className="px-6 pb-6 text-base leading-6 text-[#424656]">{item.a}</p>
+                      <div className="border-t border-[rgba(194,198,216,0.2)] px-6 pb-6 pt-4">
+                        <p className="text-base leading-7 text-[#424656]">{item.a}</p>
+                      </div>
                     ) : null}
                   </div>
                 );
@@ -343,7 +297,6 @@ export default function WebPage() {
         </section>
       </main>
 
-      {/* Footer */}
       <footer className="relative overflow-hidden bg-[#191b24]">
         <div className="pointer-events-none absolute inset-0 opacity-20">
           <img src={imgVector} alt="" className="absolute left-[40%] top-[-20%] w-[60%]" />
@@ -353,8 +306,8 @@ export default function WebPage() {
         </div>
         <div className="relative mx-auto flex max-w-[1280px] flex-col items-center gap-24 px-10 py-32">
           <h2 className="max-w-[924px] text-center text-7xl font-extrabold tracking-tight text-white">
-            <span className="block leading-[72px]">Your work is global.</span>
-            <span className="block font-normal leading-[72px] text-[#b3c5ff]">Your money should be too.</span>
+            <span className="block leading-[72px]">{t.footerLine1}</span>
+            <span className="block font-normal leading-[72px] text-[#b3c5ff]">{t.footerLine2}</span>
           </h2>
           <div className="grid w-full grid-cols-12 gap-8 border-t border-[rgba(225,226,238,0.2)] pt-12">
             <div className="col-span-4">
@@ -362,23 +315,18 @@ export default function WebPage() {
                 <img src={imgLogo} alt="" className="size-8 rounded-full object-cover shadow-[0_0_0_2px_#dae1ff]" />
                 <span className="text-xl text-white">KnockNok</span>
               </div>
-              <p className="max-w-sm text-base leading-6 text-[rgba(225,226,238,0.8)]">
-                Global payments for a more open world.
-              </p>
+              <p className="max-w-sm text-base leading-6 text-[rgba(225,226,238,0.8)]">{t.footerTagline}</p>
             </div>
             <div className="col-span-6 col-start-7 flex flex-col justify-between">
               <div className="mb-8 rounded-2xl border border-[rgba(225,226,238,0.1)] bg-[rgba(225,226,238,0.05)] p-6 backdrop-blur-md">
                 <div className="mb-3 flex items-center gap-2">
                   <img src={imgDisclosure} alt="" className="size-3" />
-                  <span className="text-sm uppercase tracking-[0.7px] text-[#e1e2ee]">Disclosure</span>
+                  <span className="text-sm uppercase tracking-[0.7px] text-[#e1e2ee]">{t.disclosure}</span>
                 </div>
-                <p className="text-sm leading-[22.75px] text-[rgba(225,226,238,0.7)]">
-                  KnockNok is a financial technology company, not a bank. KnockNok does not hold or have custody of
-                  customer funds.
-                </p>
+                <p className="text-sm leading-[22.75px] text-[rgba(225,226,238,0.7)]">{t.disclosureBody}</p>
               </div>
               <p className="border-t border-[rgba(225,226,238,0.1)] pt-4 text-xs text-[rgba(225,226,238,0.5)]">
-                © 2026 KNOCKNOK INC. All rights reserved.
+                {t.copyright}
               </p>
             </div>
           </div>

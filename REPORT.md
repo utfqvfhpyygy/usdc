@@ -46,18 +46,17 @@ npm run build
 npm run preview
 ```
 
-## Updates (official copy)
+## Updates (official zh)
 
-- Synced **EN** UI strings from `/workspace/kennethTest/usd-site-copy/official-en.txt` into `src/i18n/messages.ts` (nav, hero, dashboard labels, features, steps, all **11 FAQ** Q&A).
-- Added matching **简体中文** translations for the full official EN set; brand terms KnockNok / USDC / ACH retained.
-- FAQ accordion shows the answer for every item when expanded.
-- Language switch (`knocknok-lang` localStorage) unchanged.
+- Replaced **all** `zh` locale strings in `src/i18n/messages.ts` with verbatim copy from `/workspace/kennethTest/usd-site-copy/official-zh.txt` (nav, hero, features, steps, mock labels, all 11 FAQ Q&A, footer slogan, 免责声明, tagline, copyright).
+- **EN** left as previously synced from `official-en.txt`.
+- Language switch EN ↔ 中文 (`knocknok-lang`) unchanged; FAQ answers show when expanded in both locales.
 
 ## Remaining notes
 
-1. Footer slogan / disclosure not present in `official-en.txt`; kept prior Figma marketing footer copy (EN + ZH).
-2. Phone mockup image chrome (Total Balance / Earn screens) remains in raster assets, not re-typeset as HTML.
-3. H5 hamburger is an in-page section nav.
+1. Phone mockup image chrome remains in raster assets (not HTML-retyped from official phone UI lines).
+2. H5 hamburger is an in-page section nav.
+3. UI-only chrome not in official files: `桌面版` / `菜单` (H5).
 
 ## Build status
 
